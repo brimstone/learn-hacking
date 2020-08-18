@@ -1,0 +1,133 @@
+# Lots of inspiration from:
+# https://github.com/rgl/windows-domain-controller-vagrant
+# https://github.com/UNT-CAS/Vagrant-AD-Lab
+# https://github.com/clong/DetectionLab
+
+boxes = [
+ {
+  :name => "DC1",
+  :image => "gusztavvargadr/windows-server",
+  :memory => 2048,
+  :ip => "192.168.56.2",
+  :scripts => [
+   "domain-controller.ps1",
+   "domain-controller-configure.ps1",
+   "general.ps1",
+  ]
+ },
+ {
+  :name => "station1",
+  :image => "gusztavvargadr/windows-10-enterprise-ltsc",
+  :memory => 2048,
+  :ip => "192.168.56.3",
+  :gateway => "192.168.56.2",
+  :dns => "192.168.56.2",
+  :scripts => [
+   "domainjoin.ps1",
+   "autologin-tony.ps1",
+   "general.ps1",
+  ]
+ },
+ {
+  :name => "station2",
+  :image => "gusztavvargadr/windows-10-enterprise-ltsc",
+  :memory => 2048,
+  :ip => "192.168.56.4",
+  :gateway => "192.168.56.2",
+  :dns => "192.168.56.2",
+  :scripts => [
+   "domainjoin.ps1",
+   "autologin-tony.ps1",
+   "general.ps1",
+  ]
+ }
+]
+
+Vagrant.configure("2") do |config|
+ boxes.each do |box|
+  config.vm.define box[:name] do |cfg|
+   cfg.vm.box = box[:image]
+   cfg.vm.boot_timeout = 1800
+
+   cfg.vm.hostname = box[:name]
+
+   # use the plaintext WinRM transport and force it to use basic authentication.
+   cfg.winrm.transport = :plaintext
+   cfg.winrm.basic_auth_only = true
+
+   cfg.vm.communicator = "winrm"
+   if box[:gateway]
+    cfg.vm.network :private_network, ip: box[:ip], gateway: box[:gateway], dns: box[:dns]
+   else
+    cfg.vm.network :private_network, ip: box[:ip]
+   end
+
+   box[:scripts].each do |script|
+    if File.file?("scripts/" + script)
+     cfg.vm.provision "shell", path: "scripts/" + script
+     cfg.vm.provision "shell", reboot: true
+    else
+     cfg.vm.provision "shell", inline: script
+    end
+   end
+
+   cfg.vm.provider "virtualbox" do |vb, override|
+    vb.gui = false
+    vb.customize ["modifyvm", :id, "--memory", box[:memory]]
+    vb.customize ["modifyvm", :id, "--cpus", 2]
+    vb.customize ["modifyvm", :id, "--vram", "32"]
+    vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
+    vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all"]
+   end
+  end
+ end
+
+ config.vm.define "SQL" do |cfg|
+  cfg.vm.box = "gusztavvargadr/windows-server"
+
+  cfg.vm.hostname = "SQL"
+
+  cfg.vm.communicator = "winrm"
+  cfg.vm.network :private_network, ip: "192.168.56.4", gateway: "192.168.56.2", dns: "192.168.56.2"
+  cfg.vm.provision "shell", reboot: true
+  cfg.vm.provision "shell", path: "domainjoin.ps1"
+  cfg.vm.provision "shell", reboot: true
+  cfg.vm.provision "shell",
+  inline: "net localgroup Administrators svc.acct /add"
+  cfg.vm.provision "shell", path: "autologin-rebecca.ps1"
+
+  cfg.vm.provider "virtualbox" do |vb, override|
+   vb.gui = true
+   vb.customize ["modifyvm", :id, "--memory", 2048]
+   vb.customize ["modifyvm", :id, "--cpus", 2]
+   vb.customize ["modifyvm", :id, "--vram", "32"]
+   vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
+   vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all"]
+  end
+ end
+
+ config.vm.define "attacker" do |cfg|
+  cfg.vm.box = "gusztavvargadr/windows-server"
+
+  cfg.vm.hostname = "attacker"
+
+  cfg.vm.communicator = "winrm"
+  cfg.vm.network :private_network, ip: "192.168.56.10", gateway: "192.168.56.2", dns: "192.168.56.2"
+  cfg.vm.provision "shell", reboot: true
+  cfg.vm.provision "shell", path: "domainjoin.ps1"
+  cfg.vm.provision "shell", reboot: true
+  cfg.vm.provision "shell",
+  inline: "net localgroup Administrators tester /add"
+  cfg.vm.provision "shell",
+  inline: "echo 'Now you can logon to attacker vm with tester:It3st2Detest!'"
+
+  cfg.vm.provider "virtualbox" do |vb, override|
+   vb.gui = true
+   vb.customize ["modifyvm", :id, "--memory", 2048]
+   vb.customize ["modifyvm", :id, "--cpus", 2]
+   vb.customize ["modifyvm", :id, "--vram", "32"]
+   vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
+   vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all"]
+  end
+ end
+end
