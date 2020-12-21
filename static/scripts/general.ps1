@@ -1,7 +1,9 @@
 # https://serverfault.com/questions/873522/how-do-i-completely-turn-off-windows-defender-from-powershell
 # https://docs.microsoft.com/en-us/powershell/module/defender/set-mppreference?view=win10-ps
+
 # Disable Automatic Sample Submission
-Set-MpPreference -SubmitSamplesConsent NeverSend
+#Set-MpPreference -SubmitSamplesConsent NeverSend
+Set-MpPreference -SubmitSamplesConsent Never
 # Disable Cloud-Based Protection
 Set-MpPreference -MAPSReporting Disable
 
