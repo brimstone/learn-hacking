@@ -69,7 +69,7 @@ Vagrant.configure("2") do |config|
 
    if box[:os] == "windows"
      cfg.vm.communicator = "winrm"
-   fi
+   end
    if box[:gateway]
     cfg.vm.network :private_network, ip: box[:ip], gateway: box[:gateway], dns: box[:dns]
    else
