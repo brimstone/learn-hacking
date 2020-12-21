@@ -6,7 +6,7 @@
 boxes = [
  {
   :name => "DC1",
-  :image => "brimstone/eval-win2016-standard",
+  :image => "brimstone/eval-win2016-standard-nocm",
   :memory => 2048,
   :ip => "192.168.56.2",
   :os => "windows",
@@ -18,7 +18,7 @@ boxes = [
  },
  {
   :name => "station1",
-  :image => "brimstone/eval-win10x64-enterprise",
+  :image => "brimstone/eval-win10x64-enterprise-nocm",
   :memory => 2048,
   :ip => "192.168.56.3",
   :gateway => "192.168.56.2",
@@ -32,7 +32,7 @@ boxes = [
  },
  {
   :name => "station2",
-  :image => "brimstone/eval-win10x64-enterprise",
+  :image => "brimstone/eval-win10x64-enterprise-nocm",
   :memory => 2048,
   :ip => "192.168.56.4",
   :gateway => "192.168.56.2",
