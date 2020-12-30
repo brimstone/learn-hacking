@@ -45,6 +45,20 @@ boxes = [
   ]
  },
  {
+  :name => "web1",
+  :image => "brimstone/eval-win2012r2-standard-nocm",
+  :memory => 2048,
+  :ip => "192.168.56.5",
+  :gateway => "192.168.56.2",
+  :dns => "192.168.56.2",
+  :os => "windows",
+  :scripts => [
+   "domainjoin.ps1",
+   "blog.ps1",
+   "general.ps1",
+  ]
+ },
+ {
   :name => "attacker",
   :image => "kalilinux/rolling",
   :memory => 2048,
