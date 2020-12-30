@@ -14,7 +14,7 @@ $adDomain = Get-ADDomain
 $domain = $adDomain.DNSRoot
 $domainDn = $adDomain.DistinguishedName
 $usersAdPath = "CN=Users,$domainDn"
-$howardPassword = ConvertTo-SecureString -AsPlainText 'Howard19' + (10..99 | Get-Random) -Force
+$howardPassword = ConvertTo-SecureString -AsPlainText ('Howard19' + (10..99 | Get-Random)) -Force
 $tonyPassword = ConvertTo-SecureString -AsPlainText 'tony' -Force
 $mariaPassword = ConvertTo-SecureString -AsPlainText 'Tony@1970' -Force
 $SvcAcctPwd = ConvertTo-SecureString -AsPlainText 'P@ssw0rd1' -Force
