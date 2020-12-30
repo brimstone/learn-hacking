@@ -81,6 +81,10 @@ Vagrant.configure("2") do |config|
    cfg.winrm.transport = :plaintext
    cfg.winrm.basic_auth_only = true
 
+   if not ENV["VAGRANT_PASS"].nil?
+     cfg.winrm.password = ENV["VAGRANT_PASS"]
+   end
+
    if box[:os] == "windows"
      cfg.vm.communicator = "winrm"
    end
