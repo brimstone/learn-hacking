@@ -2,15 +2,17 @@
 # https://docs.microsoft.com/en-us/powershell/module/defender/set-mppreference?view=win10-ps
 
 # Disable Automatic Sample Submission
-if ([Environment]::OSVersion.Version -ge (new-object 'Version' 10,0,17763)) {
-	# 2019 Server
-	Set-MpPreference -SubmitSamplesConsent NeverSend
-} else {
-	# 2016 Server
-	Set-MpPreference -SubmitSamplesConsent Never
+if ([Environment]::OSVersion.Version -ge (new-object 'Version' 10,0,0)) {
+	if ([Environment]::OSVersion.Version -ge (new-object 'Version' 10,0,17763)) {
+		# 2019 Server
+		Set-MpPreference -SubmitSamplesConsent NeverSend
+	} else {
+		# 2016 Server
+		Set-MpPreference -SubmitSamplesConsent Never
+	}
+	# Disable Cloud-Based Protection
+	Set-MpPreference -MAPSReporting Disable
 }
-# Disable Cloud-Based Protection
-Set-MpPreference -MAPSReporting Disable
 
 # Enable Guest access to SMB shares
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" -Name "AllowInsecureGuestAuth" -Type DWord -Value 1
