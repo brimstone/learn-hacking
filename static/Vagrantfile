@@ -32,7 +32,7 @@ boxes = [
  },
  {
   :name => "station2",
-  :image => "brimstone/eval-win10x64-enterprise-nocm",
+  :image => "brimstone/eval-win7x86-enterprise-nocm",
   :memory => 2048,
   :ip => "192.168.56.4",
   :gateway => "192.168.56.2",
