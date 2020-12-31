@@ -21,7 +21,8 @@
   },
   "attacker": {
     "image": "kalilinux/rolling",
-    "ip": "192.168.56.100"
+    "ip": "192.168.56.100",
+    "os": "linux"
   },
   "station1": {
     "ip": "192.168.56.3",
