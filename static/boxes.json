@@ -43,7 +43,7 @@
   },
   "web1": {
     "image": "brimstone/eval-win2012r2-standard-nocm",
-    "ip": "193.168.56.5",
+    "ip": "192.168.56.5",
     "scripts": [
       "domainjoin.ps1",
       "blog.ps1",
