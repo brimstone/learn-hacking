@@ -1,0 +1,2 @@
+choco install visualstudio2019community
+choco install apimonitor

@@ -17,10 +17,18 @@ $usersAdPath = "CN=Users,$domainDn"
 $howardPassword = ConvertTo-SecureString -AsPlainText ('Howard19' + (10..99 | Get-Random)) -Force
 $tonyPassword = ConvertTo-SecureString -AsPlainText 'tony' -Force
 $mariaPassword = ConvertTo-SecureString -AsPlainText 'Tony@1970' -Force
-$SvcAcctPwd = ConvertTo-SecureString -AsPlainText 'P@ssw0rd1' -Force
+$jarvisHTTPPassword = ConvertTo-SecureString -AsPlainText 'P@ssw0rd1' -Force
 $AdminstratorPassword = ConvertTo-SecureString 'YouMortal!HowDareYouQuestionThe1?' -AsPlainText -Force
 
-Set-ADDefaultDomainPasswordPolicy -Identity parent -ComplexityEnabled $false -MinPasswordLength 1
+New-ADGroup -Name "HTTP Admins" `
+    -SamAccountName "HTTP Admins" `
+    -GroupCategory Security `
+    -GroupScope Global `
+    -DisplayName "HTTP Administrators" `
+    -Path "$usersAdPath" `
+    -Description "Members of this group are Administrators of HTTP servers"
+
+Set-ADDefaultDomainPasswordPolicy -Identity stark -ComplexityEnabled $false -MinPasswordLength 1
 # add the vagrant user to the Enterprise Admins group.
 # NB this is needed to install the Enterprise Root Certification Authority.
 Add-ADGroupMember `
@@ -42,8 +50,8 @@ Set-ADUser `
     -PasswordNeverExpires $true
 
 
-# add tester.
-$name = 'hstark'
+# add Howard
+$name = 'Howard'
 New-ADUser `
     -Path $usersAdPath `
     -Name $name `
@@ -55,7 +63,7 @@ New-ADUser `
     -PasswordNeverExpires $true
 
 # add Maria
-$name = 'MStark'
+$name = 'Maria'
 New-ADUser `
     -Path $usersAdPath `
     -Name $name `
@@ -72,8 +80,8 @@ Add-ADGroupMember `
     -Identity 'Domain Admins' `
     -Members "CN=$name,$usersAdPath"
 
-# add Rebecca Howe.
-$name = 'tony'
+# add Tony
+$name = 'Tony'
 New-ADUser `
     -Path $usersAdPath `
     -Name $name `
@@ -86,49 +94,46 @@ New-ADUser `
     -Enabled $true `
     -PasswordNeverExpires $true
 
-# add Svc Acct.
-$name = 'svc.acct'
+# add Service Account for Jarvis
+$name = 'Jarvis-HTTP'
 New-ADUser `
     -Path $usersAdPath `
     -Name $name `
-    -DisplayName 'Svc Acct' `
-    -AccountPassword $SvcAcctPwd `
+    -DisplayName 'HTTP Service Account for Jarvis' `
+    -AccountPassword $jarvisHTTPPassword `
     -Enabled $true `
-    -ServicePrincipalNames "MSSQLSVC/parentSQL.parentdomain.local" `
+    -ServicePrincipalNames "HTTP/Jarvis-HTTP.stark.local" `
     -PasswordNeverExpires $true
-
-
-New-ADComputer `
-   -Description "Who is a good computer? I'm a good computer." `
-   -DisplayName "parentWkstn" `
-   -DNSHostName "parentWkstn.ParentDomain.local" `
-   -Enabled $True `
-   -Name "parentWkstn" `
-   -SAMAccountName "parentWkstn"
+Add-ADGroupMember `
+    -Identity 'HTTP Admins' `
+    -Members "CN=Jarvis-HTTP,$usersAdPath"
 
 New-ADComputer `
    -Description "Who is a good computer? I'm a good computer." `
-   -DisplayName "parentSQL" `
-   -DNSHostName "parentSQL.parentdomain.local" `
+   -DisplayName "web1" `
+   -DNSHostName "web1.stark.local" `
    -Enabled $True `
-   -Name "parentSQL" `
-   -SAMAccountName "parentSQL"
+   -Name "WEB1" `
+   -SAMAccountName "WEB1"
+# Unconstrained Delegation
+Get-ADComputer -Identity WEB1 | Set-ADAccountControl -TrustedForDelegation $true
 
-Get-ADComputer -Identity 'parentWkstn' | Set-ADAccountControl -TrustedToAuthForDelegation $true
-Set-ADComputer -Identity 'parentWkstn' -Add @{'msDS-AllowedToDelegateTo'=@('cifs/PARENTDC')}
+# TODO is this useful?
+#Get-ADComputer -Identity 'pc-tony' | Set-ADAccountControl -TrustedToAuthForDelegation $true
+#Set-ADComputer -Identity 'pc-tony' -Add @{'msDS-AllowedToDelegateTo'=@('cifs/STARK')}
 
 echo 'Howard Stark Group Membership'
-Get-ADPrincipalGroupMembership -Identity 'hstark' `
+Get-ADPrincipalGroupMembership -Identity 'howard' `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
 
 echo 'Maria Stark Group Membership'
-Get-ADPrincipalGroupMembership -Identity 'mstark' `
+Get-ADPrincipalGroupMembership -Identity 'maria' `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
 
-echo 'svc.acct Group Membership'
-Get-ADPrincipalGroupMembership -Identity 'svc.acct' `
+echo 'Jarvis-http Group Membership'
+Get-ADPrincipalGroupMembership -Identity 'Jarvis-HTTP' `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
 
@@ -137,7 +142,7 @@ Get-ADPrincipalGroupMembership -Identity 'vagrant' `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
 
-echo 'Tony StarkGroup Membership'
+echo 'Tony Group Membership'
 Get-ADPrincipalGroupMembership -Identity 'tony' `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
@@ -151,6 +156,12 @@ Get-ADGroupMember `
 echo 'Domain Administrators'
 Get-ADGroupMember `
     -Identity 'Domain Admins' `
+    | Select-Object Name,DistinguishedName,SID `
+    | Format-Table -AutoSize | Out-String -Width 2000
+
+echo 'HTTP Administrators'
+Get-ADGroupMember `
+    -Identity 'HTTP Admins' `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
 

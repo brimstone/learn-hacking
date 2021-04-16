@@ -1,8 +1,8 @@
 param(
-    $domain = 'ParentDomain.local'
+    $domain = 'stark.local'
 )
 
-$netbiosDomain = 'parent'
+$netbiosDomain = 'stark'
 
 $safeModeAdminstratorPassword = ConvertTo-SecureString 'This1sN0tBl@sphemyThis1sN0tM@dness!' -AsPlainText -Force
 
@@ -22,4 +22,4 @@ Install-ADDSForest `
     -SafeModeAdministratorPassword $safeModeAdminstratorPassword `
     -NoRebootOnCompletion `
     -Force
-
+shutdown /r /t 0
