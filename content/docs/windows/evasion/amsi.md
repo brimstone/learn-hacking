@@ -22,16 +22,22 @@ b8 57 00 07 80          mov    eax,0x80070057 # AMSI_RESULT_CLEAN
 c3                      ret
 ```
 
+This replacement function is just two asm calls that push `AMSI_RESULT_CLEAN` into `eax` and return. This makes any call to `AmsiScanBuffer` succeed as if the file was clean.
+
+### Powershell
+
 In powershell, patching `AmsiScanBuffer` basically means calling out to a little C# code to do the heavy work of calling Win32 APIs to patch the function in the current process.
 
-## Examples
-{{< details "Powershell Example" >}}
+{{< details "Code" >}}
 {{% code file="/content/docs/windows/evasion/powershell_rasta.ps1" language="powershell" %}}
-References:
-- https://fatrodzianko.com/2020/08/25/getting-rastamouses-amsiscanbufferbypass-to-work-again/
 {{< /details >}}
 
-{{< details "Nim Example" >}}
+References:
+- https://fatrodzianko.com/2020/08/25/getting-rastamouses-amsiscanbufferbypass-to-work-again/
+
+### Nim
+
+{{< details "Example" >}}
 {{% code file="/content/docs/windows/evasion/nim_offensivenim.nim" language="nim" %}}
 {{< /details >}}
 
