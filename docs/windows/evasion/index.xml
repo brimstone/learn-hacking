@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Evasion on Learn Hacking</title><link>https://brimstone.github.io/learn-hacking/docs/windows/evasion/</link><description>Recent content in Evasion on Learn Hacking</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://brimstone.github.io/learn-hacking/docs/windows/evasion/index.xml" rel="self" type="application/rss+xml"/><item><title>AMSI</title><link>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</guid><description>AMSI # This is the Windows AntiMalware Scan Interface. This is basically an interface for scanning file, processes, and more that can then be used by Windows Defender or other antivirus products.
-Patching AmsiScanBuffer # It might be as easy as patching the AmsiScanBuffer function provided by amsi.dll to return false.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Evasion on Learn Hacking</title>
+    <link>https://brimstone.github.io/learn-hacking/docs/windows/evasion/</link>
+    <description>Recent content in Evasion on Learn Hacking</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://brimstone.github.io/learn-hacking/docs/windows/evasion/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AMSI</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</guid>
+      <description>AMSI #  This is the Windows AntiMalware Scan Interface. This is basically an interface for scanning file, processes, and more that can then be used by Windows Defender or other antivirus products.
+Patching AmsiScanBuffer #  It might be as easy as patching the AmsiScanBuffer function provided by amsi.dll to return false.
 The basic process here is:
-Use LoadLibrary to read amsi.dll from disk into a known variable handle.</description></item></channel></rss>
+ Use LoadLibrary to read amsi.dll from disk into a known variable handle.</description>
+    </item>
+    
+  </channel>
+</rss>

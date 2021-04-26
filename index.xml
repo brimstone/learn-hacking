@@ -1,8 +1,88 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Learn Hacking</title><link>https://brimstone.github.io/learn-hacking/</link><description>Recent content on Learn Hacking</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://brimstone.github.io/learn-hacking/index.xml" rel="self" type="application/rss+xml"/><item><title>AMSI</title><link>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</guid><description>AMSI # This is the Windows AntiMalware Scan Interface. This is basically an interface for scanning file, processes, and more that can then be used by Windows Defender or other antivirus products.
-Patching AmsiScanBuffer # It might be as easy as patching the AmsiScanBuffer function provided by amsi.dll to return false.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Learn Hacking</title>
+    <link>https://brimstone.github.io/learn-hacking/</link>
+    <description>Recent content on Learn Hacking</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://brimstone.github.io/learn-hacking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AMSI</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</guid>
+      <description>AMSI #  This is the Windows AntiMalware Scan Interface. This is basically an interface for scanning file, processes, and more that can then be used by Windows Defender or other antivirus products.
+Patching AmsiScanBuffer #  It might be as easy as patching the AmsiScanBuffer function provided by amsi.dll to return false.
 The basic process here is:
-Use LoadLibrary to read amsi.dll from disk into a known variable handle.</description></item><item><title>Burp</title><link>https://brimstone.github.io/learn-hacking/docs/web/tools/burp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/web/tools/burp/</guid><description>Burp # TODO Fill this out
-&amp;ldquo;how would you typically set up intruder, what settings would you use etc&amp;rdquo; Intruder #</description></item><item><title>CSRF</title><link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/CSRF/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/CSRF/</guid><description>Cross Site Request Forgery # TODO Fill this out
-can you explain how you&amp;rsquo;d test for or exploit a csrf vulnerability with a password reset function in a page</description></item><item><title>IDOR</title><link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/IDOR/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/IDOR/</guid><description>Insecure Direct Object References # TODO Fill this out Oh, needs content I bet</description></item><item><title>nmap</title><link>https://brimstone.github.io/learn-hacking/docs/recon/tools/nmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/recon/tools/nmap/</guid><description>Network Mapper # TODO Fill this out if you were to nmap scan a target what settings would you typically use (and what do the settings mean)</description></item><item><title>SQLi</title><link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/sqli/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/sqli/</guid><description>SQL Injection # TODO Fill this out
-also more generic but keep hearing it, can you explain what SQLi is (detailed) and the followup question of the ways to remediate/prevent it</description></item><item><title>XSS</title><link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xss/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xss/</guid><description>Cross Site Scripting # TODO Fill this out
-can you explain different types of xss and where you&amp;rsquo;d typically find them, followup question might by what types of xss evasion techniques have you used (example &amp;lt;script&amp;gt; etc)</description></item><item><title>XXE</title><link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xxe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xxe/</guid><description>XML External Entities # TODO Fill this out can you explain what XXE is and how to do it/remediate - (DTDs etc)</description></item></channel></rss>
+ Use LoadLibrary to read amsi.dll from disk into a known variable handle.</description>
+    </item>
+    
+    <item>
+      <title>Burp</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/web/tools/burp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/web/tools/burp/</guid>
+      <description>Burp #  TODO Fill this out
+ &amp;ldquo;how would you typically set up intruder, what settings would you use etc&amp;rdquo;   Intruder #  </description>
+    </item>
+    
+    <item>
+      <title>CSRF</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/CSRF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/CSRF/</guid>
+      <description>Cross Site Request Forgery #  TODO Fill this out
+ can you explain how you&amp;rsquo;d test for or exploit a csrf vulnerability with a password reset function in a page   </description>
+    </item>
+    
+    <item>
+      <title>IDOR</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/IDOR/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/IDOR/</guid>
+      <description>Insecure Direct Object References #  TODO Fill this out  Oh, needs content I bet</description>
+    </item>
+    
+    <item>
+      <title>nmap</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/recon/tools/nmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/recon/tools/nmap/</guid>
+      <description>Network Mapper #  TODO Fill this out if you were to nmap scan a target what settings would you typically use (and what do the settings mean)  </description>
+    </item>
+    
+    <item>
+      <title>SQLi</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/sqli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/sqli/</guid>
+      <description>SQL Injection #  TODO Fill this out
+ also more generic but keep hearing it, can you explain what SQLi is (detailed) and the followup question of the ways to remediate/prevent it   </description>
+    </item>
+    
+    <item>
+      <title>XSS</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xss/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xss/</guid>
+      <description>Cross Site Scripting #  TODO Fill this out
+ can you explain different types of xss and where you&amp;rsquo;d typically find them, followup question might by what types of xss evasion techniques have you used (example &amp;lt;script&amp;gt; etc)   </description>
+    </item>
+    
+    <item>
+      <title>XXE</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xxe/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xxe/</guid>
+      <description>XML External Entities #  TODO Fill this out can you explain what XXE is and how to do it/remediate - (DTDs etc)  </description>
+    </item>
+    
+  </channel>
+</rss>
