@@ -1,7 +1,7 @@
 # hugo server --minify --themesDir ... --baseURL=http://0.0.0.0:1313/theme/hugo-book/
 
-#baseURL = '/learn-hacking/'
 relativeURLs = true
+canonifyURLs = true
 title = 'Learn Hacking'
 theme = 'hugo-book'
 
