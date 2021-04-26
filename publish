@@ -1,9 +1,10 @@
 #!/bin/bash
 set -euo pipefail
-hugo --minify
+hugo --minify --baseURL=https://brimstone.github.io/learn-hacking/
 rm -f public/local.json
 git checkout gh-pages
 rsync -Pa --delete-after --exclude static --exclude .git public/ .
 git add .
 git commit -m "Publishing $(date)"
+git push
 git checkout trunk
