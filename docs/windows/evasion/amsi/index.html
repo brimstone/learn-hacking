@@ -16,13 +16,13 @@ The basic process here is:
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2021-04-25T20:43:48-04:00" />
+<meta property="article:modified_time" content="2021-04-26T08:50:14-04:00" />
 
 <title>AMSI | Learn Hacking</title>
 <link rel="manifest" href="/learn-hacking/manifest.json">
 <link rel="icon" href="/learn-hacking/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/learn-hacking/book.min.0a36c100c3ea78a0e704987f9303e963e7ee83b1dca16a523adf9e226bccddc2.css" integrity="sha256-CjbBAMPqeKDnBJh/kwPpY&#43;fug7HcoWpSOt&#43;eImvM3cI=">
-<script defer src="/learn-hacking/en.search.min.1d0b53904cbe47c1fc53e86d68e457bc1ef6204b859442dd207c87d75389c238.js" integrity="sha256-HQtTkEy&#43;R8H8U&#43;htaORXvB72IEuFlELdIHyH11OJwjg="></script>
+<script defer src="/learn-hacking/en.search.min.1f3dabaf795a76d84d6303521a657fd389ffe2f4b03aedc3e30aaa425b005a0e.js" integrity="sha256-Hz2rr3ladthNYwNSGmV/04n/4vSwOu3D4wqqQlsAWg4="></script>
 
 <script defer src="/learn-hacking/sw.min.a19ae37ba33556955ea25f52af48865e4ec3fe2c6cc47b7b35f03bfeeeded151.js" integrity="sha256-oZrje6M1VpVeol9Sr0iGXk7D/ixsxHt7NfA7/u7e0VE="></script>
 <!--
@@ -409,6 +409,8 @@ https://github.com/alex-shpak/hugo-book
     <li><a href="#amsi">AMSI</a>
       <ul>
         <li><a href="#patching-amsiscanbuffer">Patching <code>AmsiScanBuffer</code></a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a href="#references">References</a></li>
       </ul>
     </li>
   </ul>
@@ -444,6 +446,10 @@ https://github.com/alex-shpak/hugo-book
 <pre><code>b8 57 00 07 80          mov    eax,0x80070057 # AMSI_RESULT_CLEAN
 c3                      ret
 </code></pre><p>In powershell, patching <code>AmsiScanBuffer</code> basically means calling out to a little C# code to do the heavy work of calling Win32 APIs to patch the function in the current process.</p>
+<h2 id="examples">
+  Examples
+  <a class="anchor" href="#examples">#</a>
+</h2>
 <details >
   <summary>Powershell Example</summary>
   <div class="markdown-inner">
@@ -541,7 +547,10 @@ $Patch = <span style="color:#66d9ef">[Byte[]]</span> (0xB8, 0x57, 0x00, 0x07, 0x
   </div>
 </details>
 
-<p><em>References:</em></p>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
 <ul>
 <li><a href="https://onlinedisassembler.com/odaweb/majaEeX0/0">https://onlinedisassembler.com/odaweb/majaEeX0/0</a></li>
 <li><a href="https://docs.microsoft.com/en-us/windows/win32/memory/memory-protection-constants">https://docs.microsoft.com/en-us/windows/win32/memory/memory-protection-constants</a></li>
@@ -557,7 +566,7 @@ $Patch = <span style="color:#66d9ef">[Byte[]]</span> (0xB8, 0x57, 0x00, 0x07, 0x
 
 
 
-  <div><a class="flex align-center" href="https://github.com/brimstone/learn-hacking/commit/688c1b56e39022caf40a42c26e3b184ed063db11" title='Last modified by Matt Robinson | April 26, 2021' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/brimstone/learn-hacking/commit/c62f040feaefa39bd4beaf95f116c3d970732f36" title='Last modified by Matt Robinson | April 26, 2021' target="_blank" rel="noopener">
       <img src="/learn-hacking/svg/calendar.svg" class="book-icon" alt="Calendar" />
       <span>April 26, 2021</span>
     </a>
@@ -597,6 +606,8 @@ $Patch = <span style="color:#66d9ef">[Byte[]]</span> (0xB8, 0x57, 0x00, 0x07, 0x
     <li><a href="#amsi">AMSI</a>
       <ul>
         <li><a href="#patching-amsiscanbuffer">Patching <code>AmsiScanBuffer</code></a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a href="#references">References</a></li>
       </ul>
     </li>
   </ul>
