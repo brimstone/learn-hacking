@@ -2,7 +2,7 @@
 set -euo pipefail
 hugo
 rm public/local.json
-git checkout publish
+git checkout gh-pages
 rsync -Pa --delete-after --exclude static --exclude .git public/ .
 git add .
 git commit -m "Publishing $(date)"
