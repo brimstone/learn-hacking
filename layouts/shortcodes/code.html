@@ -1,3 +1,8 @@
-{{ $file := .Get "file" | readFile }}
+{{ $filepath := .Get "file" }}
+{{ $filename := last 1 (split $filepath "/") }}
+{{ $file := ( print "/static/examples/" (.Get "file")) | readFile }}
 {{ $lang := .Get "language" }}
 {{ (print "```" $lang "\n" $file "\n```") | safeHTML }}
+{{ range $filename }}
+<i>Source: <a href="/examples/{{ $filepath }}">{{ . }}</a></i>
+{{ end }}

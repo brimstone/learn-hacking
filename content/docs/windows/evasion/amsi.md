@@ -29,7 +29,7 @@ This replacement function is just two asm calls that push `AMSI_RESULT_CLEAN` in
 In powershell, patching `AmsiScanBuffer` basically means calling out to a little C# code to do the heavy work of calling Win32 APIs to patch the function in the current process.
 
 {{< details "Example" >}}
-{{% code file="/content/docs/windows/evasion/powershell_rasta.ps1" language="powershell" %}}
+{{% code file="windows/evasion/amsi_powershell_rasta.ps1" language="powershell" %}}
 {{< /details >}}
 
 References:
@@ -38,7 +38,7 @@ References:
 ### Nim
 
 {{< details "Example" >}}
-{{% code file="/content/docs/windows/evasion/nim_offensivenim.nim" language="nim" %}}
+{{% code file="windows/evasion/amsi_nim_offensivenim.nim" language="nim" %}}
 {{< /details >}}
 
 ## References
