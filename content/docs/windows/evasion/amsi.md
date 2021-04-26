@@ -24,6 +24,7 @@ c3                      ret
 
 In powershell, patching `AmsiScanBuffer` basically means calling out to a little C# code to do the heavy work of calling Win32 APIs to patch the function in the current process.
 
+## Examples
 {{< details "Powershell Example" >}}
 {{% code file="/content/docs/windows/evasion/powershell_rasta.ps1" language="powershell" %}}
 References:
@@ -34,7 +35,7 @@ References:
 {{% code file="/content/docs/windows/evasion/nim_offensivenim.nim" language="nim" %}}
 {{< /details >}}
 
-_References:_
+## References
 - https://onlinedisassembler.com/odaweb/majaEeX0/0
 - https://docs.microsoft.com/en-us/windows/win32/memory/memory-protection-constants
 - http://pinvoke.net/default.aspx/kernel32/VirtualProtect.html
