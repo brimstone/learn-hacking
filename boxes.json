@@ -1,0 +1,56 @@
+{
+  "DC1": {
+    "gateway": "",
+    "image": "brimstone/eval-win2016-standard-nocm",
+    "ip": "192.168.56.2",
+    "scripts": [
+      "domain-controller.ps1",
+      "domain-controller-configure.ps1",
+      "general.ps1"
+    ]
+  },
+  "_default": {
+    "dns": "192.168.56.2",
+    "folders": [],
+    "gateway": "192.168.56.2",
+    "headless": true,
+    "image": "brimstone/eval-win10x64-enterprise-nocm",
+    "memory": 2048,
+    "os": "windows",
+    "ports": [],
+    "scripts": []
+  },
+  "attacker": {
+    "image": "kalilinux/rolling",
+    "ip": "192.168.56.100",
+    "os": "linux"
+  },
+  "station1": {
+    "ip": "192.168.56.3",
+    "scripts": [
+      "domainjoin.ps1",
+      "autologin-tony.ps1",
+      "general.ps1"
+    ]
+  },
+  "station2": {
+    "image": "brimstone/eval-win7x86-enterprise-nocm",
+    "ip": "192.168.56.4",
+    "scripts": [
+      "domainjoin.ps1",
+      "autologin-tony.ps1",
+      "general.ps1"
+    ]
+  },
+  "web1": {
+    "image": "brimstone/eval-win2012r2-standard-nocm",
+    "ip": "192.168.56.5",
+    "scripts": [
+      "domainjoin.ps1",
+      "web-configure.ps1",
+      "blog.ps1",
+      "general.ps1",
+      "chocolatey.ps1"
+    ]
+  }
+}
