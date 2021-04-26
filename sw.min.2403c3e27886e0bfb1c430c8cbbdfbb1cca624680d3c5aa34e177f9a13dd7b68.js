@@ -1,0 +1,1 @@
+if(navigator.serviceWorker){navigator.serviceWorker.register("/learn-hacking/sw.js",{scope:"/learn-hacking/"});}
