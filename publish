@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
-hugo
-rm public/local.json
+hugo --minify
+rm -f public/local.json
 git checkout gh-pages
 rsync -Pa --delete-after --exclude static --exclude .git public/ .
 git add .
