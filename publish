@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+hugo
+rm public/local.json
+git checkout publish
+rsync -Pa --delete-after --exclude static --exclude .git public/ .
+git add .
+git commit -m "Publishing $(date)"
+git checkout trunk
