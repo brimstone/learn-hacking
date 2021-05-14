@@ -17,5 +17,15 @@ The basic process here is:
  Use LoadLibrary to read amsi.dll from disk into a known variable handle.</description>
     </item>
     
+    <item>
+      <title>Unhooking EDR DLLs</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/windows/evasion/unhooking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/windows/evasion/unhooking/</guid>
+      <description>Unhooking EDR DLLs #  Endpoint Detection and Response solutions are basically enhanced anti-virus products. They usually have a kernel driver watching the creation of processes then inject their own DLL into the process that then hooks a shim in place of functions loaded by other DLLs in order to detect malicious or unwanted programs based on their API calls.
+A simple example is to hook VirtualProtect from ntdll.dll and watch for calls to set an area of memory PAGE_EXECUTE_READWRITE and if so, terminate the process.</description>
+    </item>
+    
   </channel>
 </rss>

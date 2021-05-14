@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fundamentals on Learn Hacking</title>
+    <link>https://brimstone.github.io/learn-hacking/docs/windows/fundamentals/</link>
+    <description>Recent content in Fundamentals on Learn Hacking</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://brimstone.github.io/learn-hacking/docs/windows/fundamentals/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Logon Sessions and Access Tokens</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/windows/fundamentals/logonsessions-tokens/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/windows/fundamentals/logonsessions-tokens/</guid>
+      <description>Logon Sessions &amp;amp; Access Tokens #  User sessions are controlled by the Local Security Authority (LSA). This creates a Logon Session for each user, and builds an Access Token for the session.
+Logon Sessions #  Tools:
+ https://docs.microsoft.com/en-us/sysinternals/downloads/logonsessions  Access Tokens #  Tools:
+ https://github.com/googleprojectzero/sandbox-attacksurface-analysis-tools/tree/master/TokenViewer  References #   https://www.elastic.co/blog/introduction-to-windows-tokens-for-security-practitioners https://blog.cobaltstrike.com/2015/12/16/windows-access-tokens-and-alternate-credentials/  ATT&amp;amp;CK T1134 Access Token Manipulation  </description>
+    </item>
+    
+  </channel>
+</rss>

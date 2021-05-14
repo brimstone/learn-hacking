@@ -4,17 +4,21 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Burp #  TODO Fill this out
- &ldquo;how would you typically set up intruder, what settings would you use etc&rdquo;   Intruder #  ">
-<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Burp" />
-<meta property="og:description" content="Burp #  TODO Fill this out
- &ldquo;how would you typically set up intruder, what settings would you use etc&rdquo;   Intruder #  " />
+<meta name="description" content="Logon Sessions &amp; Access Tokens #  User sessions are controlled by the Local Security Authority (LSA). This creates a Logon Session for each user, and builds an Access Token for the session.
+Logon Sessions #  Tools:
+ https://docs.microsoft.com/en-us/sysinternals/downloads/logonsessions  Access Tokens #  Tools:
+ https://github.com/googleprojectzero/sandbox-attacksurface-analysis-tools/tree/master/TokenViewer  References #   https://www.elastic.co/blog/introduction-to-windows-tokens-for-security-practitioners https://blog.cobaltstrike.com/2015/12/16/windows-access-tokens-and-alternate-credentials/  ATT&amp;CK T1134 Access Token Manipulation  ">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="Logon Sessions and Access Tokens" />
+<meta property="og:description" content="Logon Sessions &amp; Access Tokens #  User sessions are controlled by the Local Security Authority (LSA). This creates a Logon Session for each user, and builds an Access Token for the session.
+Logon Sessions #  Tools:
+ https://docs.microsoft.com/en-us/sysinternals/downloads/logonsessions  Access Tokens #  Tools:
+ https://github.com/googleprojectzero/sandbox-attacksurface-analysis-tools/tree/master/TokenViewer  References #   https://www.elastic.co/blog/introduction-to-windows-tokens-for-security-practitioners https://blog.cobaltstrike.com/2015/12/16/windows-access-tokens-and-alternate-credentials/  ATT&amp;CK T1134 Access Token Manipulation  " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://brimstone.github.io/learn-hacking/docs/web/tools/burp/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="https://brimstone.github.io/learn-hacking/docs/windows/fundamentals/logonsessions-tokens/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2020-08-18T11:21:44-04:00" />
+<meta property="article:modified_time" content="2021-05-14T09:35:51-04:00" />
 
-<title>Burp | Learn Hacking</title>
+<title>Logon Sessions and Access Tokens | Learn Hacking</title>
 <link rel="manifest" href="../../../../manifest.json">
 <link rel="icon" href="../../../../favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="../../../../book.min.601a93ba058c3e9d2332392f9a4cef5a1a269e08edd2b44f6885e02ddf096460.css" integrity="sha256-YBqTugWMPp0jMjkvmkzvWhomngjt0rRPaIXgLd8JZGA=">
@@ -177,7 +181,7 @@ https://github.com/alex-shpak/hugo-book
         <li>
           
   
-    <a href="../../../../docs/web/tools/burp/" class="active">Burp</a>
+    <a href="../../../../docs/web/tools/burp/" class="">Burp</a>
   
 
         </li>
@@ -321,7 +325,7 @@ https://github.com/alex-shpak/hugo-book
         <li>
           
   
-    <a href="../../../../docs/windows/fundamentals/logonsessions-tokens/" class="">Logon Sessions and Access Tokens</a>
+    <a href="../../../../docs/windows/fundamentals/logonsessions-tokens/" class="active">Logon Sessions and Access Tokens</a>
   
 
         </li>
@@ -428,7 +432,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="../../../../svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Burp</strong>
+  <strong>Logon Sessions and Access Tokens</strong>
 
   <label for="toc-control">
     
@@ -443,9 +447,11 @@ https://github.com/alex-shpak/hugo-book
     
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#burp">Burp</a>
+    <li><a href="#logon-sessions--access-tokens">Logon Sessions &amp; Access Tokens</a>
       <ul>
-        <li><a href="#intruder">Intruder</a></li>
+        <li><a href="#logon-sessions">Logon Sessions</a></li>
+        <li><a href="#access-tokens">Access Tokens</a></li>
+        <li><a href="#references">References</a></li>
       </ul>
     </li>
   </ul>
@@ -459,22 +465,37 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="burp">
-  Burp
-  <a class="anchor" href="#burp">#</a>
+  <article class="markdown"><h1 id="logon-sessions--access-tokens">
+  Logon Sessions &amp; Access Tokens
+  <a class="anchor" href="#logon-sessions--access-tokens">#</a>
 </h1>
-<blockquote class="book-hint info">
-  <p><strong>TODO</strong> Fill this out</p>
-<ul>
-<li>&ldquo;how would you typically set up intruder, what settings would you use etc&rdquo;</li>
-</ul>
-
-</blockquote>
-
-<h2 id="intruder">
-  Intruder
-  <a class="anchor" href="#intruder">#</a>
+<p>User sessions are controlled by the Local Security Authority (LSA). This creates a <strong>Logon Session</strong> for each user, and builds an <strong>Access Token</strong> for the session.</p>
+<h2 id="logon-sessions">
+  Logon Sessions
+  <a class="anchor" href="#logon-sessions">#</a>
 </h2>
+<p>Tools:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/logonsessions">https://docs.microsoft.com/en-us/sysinternals/downloads/logonsessions</a></li>
+</ul>
+<h2 id="access-tokens">
+  Access Tokens
+  <a class="anchor" href="#access-tokens">#</a>
+</h2>
+<p>Tools:</p>
+<ul>
+<li><a href="https://github.com/googleprojectzero/sandbox-attacksurface-analysis-tools/tree/master/TokenViewer">https://github.com/googleprojectzero/sandbox-attacksurface-analysis-tools/tree/master/TokenViewer</a></li>
+</ul>
+<h2 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h2>
+<ul>
+<li><a href="https://www.elastic.co/blog/introduction-to-windows-tokens-for-security-practitioners">https://www.elastic.co/blog/introduction-to-windows-tokens-for-security-practitioners</a></li>
+<li><a href="https://blog.cobaltstrike.com/2015/12/16/windows-access-tokens-and-alternate-credentials/">https://blog.cobaltstrike.com/2015/12/16/windows-access-tokens-and-alternate-credentials/</a></li>
+<li>
+  <a href="https://attack.mitre.org/techniques/T1134/">ATT&amp;CK T1134 Access Token Manipulation</a></li>
+</ul>
 </article>
  
       
@@ -485,16 +506,16 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <div><a class="flex align-center" href="https://github.com/brimstone/learn-hacking/commit/8b90555165330c36c426d08327c10f16a4160576" title='Last modified by Matt Robinson | August 18, 2020' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/brimstone/learn-hacking/commit/13a007906a7164feb49ec952f0894f9a2d1e189f" title='Last modified by Matt Robinson | May 14, 2021' target="_blank" rel="noopener">
       <img src="../../../../svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>August 18, 2020</span>
+      <span>May 14, 2021</span>
     </a>
   </div>
 
 
 
   <div>
-    <a class="flex align-center" href="https://github.com/brimstone/learn-hacking/edit/trunk/content/docs/web/tools/burp.md" target="_blank" rel="noopener">
+    <a class="flex align-center" href="https://github.com/brimstone/learn-hacking/edit/trunk/content/docs/windows/fundamentals/logonsessions-tokens.md" target="_blank" rel="noopener">
       <img src="../../../../svg/edit.svg" class="book-icon" alt="Edit" />
       <span>Edit this page</span>
     </a>
@@ -522,9 +543,11 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#burp">Burp</a>
+    <li><a href="#logon-sessions--access-tokens">Logon Sessions &amp; Access Tokens</a>
       <ul>
-        <li><a href="#intruder">Intruder</a></li>
+        <li><a href="#logon-sessions">Logon Sessions</a></li>
+        <li><a href="#access-tokens">Access Tokens</a></li>
+        <li><a href="#references">References</a></li>
       </ul>
     </li>
   </ul>
