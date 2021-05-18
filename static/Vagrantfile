@@ -11,10 +11,10 @@ require 'json'
 
 # This bit stolen from https://stackoverflow.com/a/30225093
 class ::Hash
-  def deep_merge(second)
-    merger = proc { |_, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : Array === v1 && Array === v2 ? v1 | v2 : [:undefined, nil, :nil].include?(v2) ? v1 : v2 }
-    merge!(second.to_h, &merger)
-  end
+ def deep_merge(second)
+  merger = proc { |_, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : Array === v1 && Array === v2 ? v1 | v2 : [:undefined, nil, :nil].include?(v2) ? v1 : v2 }
+  merge!(second.to_h, &merger)
+ end
 end
 
 # Setup the box defintions
@@ -70,12 +70,14 @@ Vagrant.configure("2") do |config|
    end
 
    cfg.vm.provider "virtualbox" do |vb, override|
+    vb.name = boxname
     vb.gui = !box["headless"]
     vb.customize ["modifyvm", :id, "--memory", box["memory"]]
     vb.customize ["modifyvm", :id, "--cpus", 2]
     vb.customize ["modifyvm", :id, "--vram", "32"]
     vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
     vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all"]
+    vb.customize ["modifyvm", :id, "--description", box["description"] + "\n\n" + "ip="+box["ip"] + "\nnetkoth.nic=2\nnetkoth.mode=ignore"]
    end
 
    cfg.vm.synced_folder ".", "/vagrant", disabled: true
