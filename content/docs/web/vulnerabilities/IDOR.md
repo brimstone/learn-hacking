@@ -1,11 +1,9 @@
 ---
 title: IDOR
+draft: true
 ---
 
 # Insecure Direct Object References
 {{< hint info >}}
 **TODO** Fill this out
 {{< /hint >}}
-
-
-Oh, needs content I bet

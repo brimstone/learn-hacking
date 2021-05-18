@@ -1,5 +1,6 @@
 ---
 title: XSS
+draft: true
 ---
 
 # Cross Site Scripting

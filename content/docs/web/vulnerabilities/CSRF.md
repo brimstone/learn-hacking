@@ -1,5 +1,6 @@
 ---
 title: CSRF
+draft: true
 ---
 
 # Cross Site Request Forgery

@@ -1,5 +1,6 @@
 ---
 title: SQLi
+draft: true
 ---
 
 # SQL Injection
