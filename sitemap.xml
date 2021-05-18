@@ -11,6 +11,12 @@
     <loc>https://brimstone.github.io/learn-hacking/docs/windows/fundamentals/logonsessions-tokens/</loc>
     <lastmod>2021-05-14T09:35:51-04:00</lastmod>
   </url><url>
+    <loc>https://brimstone.github.io/learn-hacking/docs/lab/users/</loc>
+    <lastmod>2021-05-18T08:58:28-04:00</lastmod>
+  </url><url>
+    <loc>https://brimstone.github.io/learn-hacking/docs/lab/machines/dc1/</loc>
+    <lastmod>2021-05-18T08:58:28-04:00</lastmod>
+  </url><url>
     <loc>https://brimstone.github.io/learn-hacking/docs/windows/evasion/</loc>
     <lastmod>2021-05-14T09:35:51-04:00</lastmod>
   </url><url>
@@ -23,17 +29,8 @@
     <loc>https://brimstone.github.io/learn-hacking/docs/windows/evasion/amsi/</loc>
     <lastmod>2021-04-26T09:29:52-04:00</lastmod>
   </url><url>
-    <loc>https://brimstone.github.io/learn-hacking/docs/web/tools/burp/</loc>
-    <lastmod>2020-08-18T11:21:44-04:00</lastmod>
-  </url><url>
-    <loc>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/CSRF/</loc>
-    <lastmod>2020-08-18T11:21:44-04:00</lastmod>
-  </url><url>
     <loc>https://brimstone.github.io/learn-hacking/docs/</loc>
-    <lastmod>2021-05-14T09:35:51-04:00</lastmod>
-  </url><url>
-    <loc>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/IDOR/</loc>
-    <lastmod>2020-08-18T11:21:44-04:00</lastmod>
+    <lastmod>2021-05-18T08:58:28-04:00</lastmod>
   </url><url>
     <loc>https://brimstone.github.io/learn-hacking/</loc>
     <lastmod>2020-08-18T11:21:44-04:00</lastmod>
@@ -41,11 +38,8 @@
     <loc>https://brimstone.github.io/learn-hacking/docs/linux/</loc>
     <lastmod>2020-08-18T11:21:44-04:00</lastmod>
   </url><url>
-    <loc>https://brimstone.github.io/learn-hacking/docs/recon/tools/nmap/</loc>
-    <lastmod>2020-08-18T11:21:44-04:00</lastmod>
-  </url><url>
-    <loc>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/sqli/</loc>
-    <lastmod>2020-08-18T11:21:44-04:00</lastmod>
+    <loc>https://brimstone.github.io/learn-hacking/docs/lab/machines/</loc>
+    <lastmod>2021-05-18T08:58:28-04:00</lastmod>
   </url><url>
     <loc>https://brimstone.github.io/learn-hacking/docs/recon/tools/</loc>
     <lastmod>2020-08-18T11:21:44-04:00</lastmod>
@@ -60,12 +54,6 @@
     <lastmod>2020-08-18T11:21:44-04:00</lastmod>
   </url><url>
     <loc>https://brimstone.github.io/learn-hacking/docs/windows/</loc>
-    <lastmod>2020-08-18T11:21:44-04:00</lastmod>
-  </url><url>
-    <loc>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xss/</loc>
-    <lastmod>2020-08-18T11:21:44-04:00</lastmod>
-  </url><url>
-    <loc>https://brimstone.github.io/learn-hacking/docs/web/vulnerabilities/xxe/</loc>
     <lastmod>2020-08-18T11:21:44-04:00</lastmod>
   </url>
 </urlset>

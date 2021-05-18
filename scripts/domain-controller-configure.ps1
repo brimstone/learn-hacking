@@ -20,6 +20,7 @@ $mariaPassword = ConvertTo-SecureString -AsPlainText 'Tony@1970' -Force
 $jarvisHTTPPassword = ConvertTo-SecureString -AsPlainText 'P@ssw0rd1' -Force
 $AdminstratorPassword = ConvertTo-SecureString 'YouMortal!HowDareYouQuestionThe1?' -AsPlainText -Force
 
+Write-Host "Making HTTP Admins group"
 New-ADGroup -Name "HTTP Admins" `
     -SamAccountName "HTTP Admins" `
     -GroupCategory Security `
@@ -28,9 +29,11 @@ New-ADGroup -Name "HTTP Admins" `
     -Path "$usersAdPath" `
     -Description "Members of this group are Administrators of HTTP servers"
 
+Write-Host "Setting password complexity requirements"
 Set-ADDefaultDomainPasswordPolicy -Identity stark -ComplexityEnabled $false -MinPasswordLength 1
 # add the vagrant user to the Enterprise Admins group.
 # NB this is needed to install the Enterprise Root Certification Authority.
+Write-Host "Adding vagrant to Enterprise Admins and Domain Admins"
 Add-ADGroupMember `
     -Identity 'Enterprise Admins' `
     -Members "CN=vagrant,$usersAdPath"
@@ -39,6 +42,7 @@ Add-ADGroupMember `
     -Identity 'Domain Admins' `
     -Members "CN=vagrant,$usersAdPath"
 
+Write-Host "Setting Administrator password"
 # set the Administrator password.
 # NB this is also an Domain Administrator account.
 Set-ADAccountPassword `
@@ -49,8 +53,8 @@ Set-ADUser `
     -Identity "CN=Administrator,$usersAdPath" `
     -PasswordNeverExpires $true
 
-
 # add Howard
+Write-Host "Adding Howard"
 $name = 'Howard'
 New-ADUser `
     -Path $usersAdPath `
@@ -63,6 +67,7 @@ New-ADUser `
     -PasswordNeverExpires $true
 
 # add Maria
+Write-Host "Adding Maria"
 $name = 'Maria'
 New-ADUser `
     -Path $usersAdPath `
@@ -81,6 +86,7 @@ Add-ADGroupMember `
     -Members "CN=$name,$usersAdPath"
 
 # add Tony
+Write-Host "Adding Tony"
 $name = 'Tony'
 New-ADUser `
     -Path $usersAdPath `
@@ -95,6 +101,7 @@ New-ADUser `
     -PasswordNeverExpires $true
 
 # add Service Account for Jarvis
+Write-Host "Adding Service Account for Jarvis: HTTP"
 $name = 'Jarvis-HTTP'
 New-ADUser `
     -Path $usersAdPath `
@@ -108,20 +115,22 @@ Add-ADGroupMember `
     -Identity 'HTTP Admins' `
     -Members "CN=Jarvis-HTTP,$usersAdPath"
 
+Write-Host "Adding computer account for WEB1"
 New-ADComputer `
-   -Description "Who is a good computer? I'm a good computer." `
+   -Description "Who is a good webserver? I'm a good webserver." `
    -DisplayName "web1" `
    -DNSHostName "web1.stark.local" `
    -Enabled $True `
    -Name "WEB1" `
    -SAMAccountName "WEB1"
-# Unconstrained Delegation
+# Vuln - Unconstrained Delegation
 Get-ADComputer -Identity WEB1 | Set-ADAccountControl -TrustedForDelegation $true
 
 # TODO is this useful?
 #Get-ADComputer -Identity 'pc-tony' | Set-ADAccountControl -TrustedToAuthForDelegation $true
 #Set-ADComputer -Identity 'pc-tony' -Add @{'msDS-AllowedToDelegateTo'=@('cifs/STARK')}
 
+Write-Host "Listing Group Memberships"
 echo 'Howard Stark Group Membership'
 Get-ADPrincipalGroupMembership -Identity 'howard' `
     | Select-Object Name,DistinguishedName,SID `
@@ -165,9 +174,10 @@ Get-ADGroupMember `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
 
-
 echo 'Enabled Domain User Accounts'
 Get-ADUser -Filter {Enabled -eq $true} `
     | Select-Object Name,DistinguishedName,SID `
     | Format-Table -AutoSize | Out-String -Width 2000
 
+# Vuln - Tony can add himself to this group and be a local admin of the webserver
+dsacls "CN=HTTP Admins,CN=Users,DC=stark,DC=local" /G S-1-1-0:GA

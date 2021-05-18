@@ -5,5 +5,17 @@
     <link>https://brimstone.github.io/learn-hacking/docs/lab/</link>
     <description>Recent content in Lab on Learn Hacking</description>
     <generator>Hugo -- gohugo.io</generator><atom:link href="https://brimstone.github.io/learn-hacking/docs/lab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Users</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/lab/users/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/lab/users/</guid>
+      <description>Users #  vagrant #  Don&amp;rsquo;t use this, use Tony. If you need a quick DA though, this is here.
+Howard #  The main DA to compromise. Password is random, but follows a format.
+Maria #  The backup DA. Password is static.
+Tony #  Average user. Uses station1 most of the time.</description>
+    </item>
+    
   </channel>
 </rss>

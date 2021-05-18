@@ -1,5 +1,6 @@
 {
   "DC1": {
+    "description": "isnameserver=true",
     "gateway": "",
     "image": "brimstone/eval-win2016-standard-nocm",
     "ip": "192.168.56.2",
@@ -10,6 +11,7 @@
     ]
   },
   "_default": {
+    "description": "Lab system from learn-hacking",
     "dns": "192.168.56.2",
     "folders": [],
     "gateway": "192.168.56.2",

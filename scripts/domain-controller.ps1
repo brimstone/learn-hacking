@@ -1,7 +1,8 @@
-param(
-    $domain = 'stark.local'
-)
+if ((gwmi win32_computersystem).partofdomain -eq $true) {
+	exit
+}
 
+$domain = 'stark.local'
 $netbiosDomain = 'stark'
 
 $safeModeAdminstratorPassword = ConvertTo-SecureString 'This1sN0tBl@sphemyThis1sN0tM@dness!' -AsPlainText -Force
