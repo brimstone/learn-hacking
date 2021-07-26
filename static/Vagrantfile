@@ -27,15 +27,45 @@ end
 default = boxes["_default"]
 boxes.delete("_default")
 
+# Display small table about boxes, also check for IP conflicts
+IPs = {}
+HEADERFORMAT = "%-9s\t%-15s\t%-7s"
+ROWFORMAT = "%-9s\t%-15s\t%4dMB"
+IPCONFLICT = false
+puts "Configured machines:"
+puts
+puts HEADERFORMAT % %w[System IP Memory]
+boxes.keys.sort.each do |boxname|
+    box = default.clone()
+    box.deep_merge(boxes[boxname])
+	ip = box["ip"]
+	if IPs[ip]
+		ip = ip + " CONFLICT"
+		IPCONFLICT = true
+	else
+		IPs[ip] = boxname
+	end
+	puts ROWFORMAT % [boxname, ip, box["memory"]]
+end
+
+if IPCONFLICT
+	puts "There's an IP conflict that must be resolved before continuing."
+	exit 1
+end
+puts
+
 # Actually configure vagrant
 Vagrant.configure("2") do |config|
- boxes.keys.each do |boxname|
+ boxes.keys.sort.each do |boxname|
   # merge the box defintion with the default values
   box = default.clone()
   box.deep_merge(boxes[boxname])
 
   config.vm.define boxname do |cfg|
    cfg.vm.box = box["image"]
+   if box["version"]
+     cfg.vm.box_version = box["version"]
+   end
    cfg.vm.boot_timeout = 1800
 
    cfg.vm.hostname = boxname
