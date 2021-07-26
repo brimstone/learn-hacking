@@ -22,14 +22,24 @@ $newDNSServers = "192.168.56.2"
 $adapters = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object {$_.IPAddress -match "192.168.56."}
 $adapters | ForEach-Object {$_.SetDNSServerSearchOrder($newDNSServers)}
 
-Start-Sleep -m 2000
+# TODO error when ping fails
+ping dc1.stark.local
 
 Write-Host "Now join the domain"
 
 $user = "stark\vagrant"
 $pass = ConvertTo-SecureString "vagrant" -AsPlainText -Force
 $DomainCred = New-Object System.Management.Automation.PSCredential $user, $pass
-Add-Computer -DomainName "stark.local" -credential $DomainCred -PassThru -Verbose
+
+# TODO possible to remove first, just incase of a complete box rebuild?
+Do {
+	$Failed = $false
+	Try {
+		Add-Computer -DomainName "stark.local" -credential $DomainCred -PassThru -Verbose -ErrorAction Stop
+	} Catch {
+		$Failed = $true
+	}
+} While ($Failed)
 
 Write-Host "Done, rebooting"
 Start-Sleep -m 2000

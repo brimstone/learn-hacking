@@ -28,16 +28,16 @@
     "os": "linux"
   },
   "station1": {
-    "ip": "192.168.56.3",
+    "ip": "192.168.56.11",
     "scripts": [
       "domainjoin.ps1",
-      "autologin-tony.ps1",
-      "general.ps1"
+      "general.ps1",
+      "autologin-tony.ps1"
     ]
   },
   "station2": {
     "image": "brimstone/eval-win7x86-enterprise-nocm",
-    "ip": "192.168.56.4",
+    "ip": "192.168.56.12",
     "scripts": [
       "domainjoin.ps1",
       "autologin-tony.ps1",
@@ -46,7 +46,7 @@
   },
   "web1": {
     "image": "brimstone/eval-win2012r2-standard-nocm",
-    "ip": "192.168.56.5",
+    "ip": "192.168.56.3",
     "scripts": [
       "domainjoin.ps1",
       "web-configure.ps1",
