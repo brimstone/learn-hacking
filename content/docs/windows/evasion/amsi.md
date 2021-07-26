@@ -41,6 +41,9 @@ References:
 {{% code file="windows/evasion/amsi_nim_offensivenim.nim" language="nim" %}}
 {{< /details >}}
 
+## Further Reading
+- https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods/
+
 ## References
 - https://onlinedisassembler.com/odaweb/majaEeX0/0
 - https://docs.microsoft.com/en-us/windows/win32/memory/memory-protection-constants
