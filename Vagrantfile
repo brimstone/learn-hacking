@@ -36,21 +36,21 @@ puts "Configured machines:"
 puts
 puts HEADERFORMAT % %w[System IP Memory]
 boxes.keys.sort.each do |boxname|
-    box = default.clone()
-    box.deep_merge(boxes[boxname])
-	ip = box["ip"]
-	if IPs[ip]
-		ip = ip + " CONFLICT"
-		IPCONFLICT = true
-	else
-		IPs[ip] = boxname
-	end
-	puts ROWFORMAT % [boxname, ip, box["memory"]]
+ box = default.clone()
+ box.deep_merge(boxes[boxname])
+ ip = box["ip"]
+ if IPs[ip]
+  ip = ip + " CONFLICT"
+  IPCONFLICT = true
+ else
+  IPs[ip] = boxname
+ end
+ puts ROWFORMAT % [boxname, ip, box["memory"]]
 end
 
 if IPCONFLICT
-	puts "There's an IP conflict that must be resolved before continuing."
-	exit 1
+ puts "There's an IP conflict that must be resolved before continuing."
+ exit 1
 end
 puts
 
@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
   config.vm.define boxname do |cfg|
    cfg.vm.box = box["image"]
    if box["version"]
-     cfg.vm.box_version = box["version"]
+    cfg.vm.box_version = box["version"]
    end
    cfg.vm.boot_timeout = 1800
 

@@ -31,6 +31,7 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 (New-Object System.Net.WebClient).DownloadFile('http://live.sysinternals.com/Procmon64.exe', 'c:\users\all users\desktop\ProcMon64.exe')
 (New-Object System.Net.WebClient).DownloadFile('http://live.sysinternals.com/procexp64.exe', 'c:\users\all users\desktop\procexp64.exe')
 (New-Object System.Net.WebClient).DownloadFile('http://live.sysinternals.com/Autoruns64.exe', 'c:\users\all users\desktop\Autoruns64.exe')
+(New-Object System.Net.WebClient).DownloadFile('http://live.sysinternals.com/tcpview64.exe', 'c:\users\all users\desktop\tcpview64.exe')
 
 # TODO check, then set $needsReboot
 Set-SmbServerConfiguration -RequireSecuritySignature $false -Force

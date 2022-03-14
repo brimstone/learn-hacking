@@ -32,6 +32,7 @@ $pass = ConvertTo-SecureString "vagrant" -AsPlainText -Force
 $DomainCred = New-Object System.Management.Automation.PSCredential $user, $pass
 
 # TODO possible to remove first, just incase of a complete box rebuild?
+Remove-Computer -UnjoinDomainCredential $DomainCred -PassThru -Verbose -ErrorAction SilentlyContinue
 Do {
 	$Failed = $false
 	Try {
