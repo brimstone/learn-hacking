@@ -19,7 +19,16 @@ Start-Sleep -m 2000
 
 Write-Host "First, set DNS to DC to join the domain"
 $newDNSServers = "192.168.56.2"
-$adapters = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object {$_.IPAddress -match "192.168.56."}
+Do {
+	$Failed = $false
+	$adapters = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object {$_.IPAddress -match "192.168.56."}
+	if (([array]$adapters).Count -lt 1 ) {
+		Start-Sleep -m 2000
+		$Failed = true
+	}
+} While ($Failed)
+# TODO keep checking until there's an adapter that matches
+Write-Host $adapters
 $adapters | ForEach-Object {$_.SetDNSServerSearchOrder($newDNSServers)}
 
 # TODO error when ping fails
