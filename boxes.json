@@ -13,15 +13,11 @@
   "_default": {
     "description": "Lab system from learn-hacking",
     "dns": "192.168.56.2",
-    "files": [],
-    "folders": [],
     "gateway": "192.168.56.2",
     "headless": true,
     "image": "brimstone/eval-win10x64-enterprise-nocm",
-    "memory": 2048,
-    "os": "windows",
-    "ports": [],
-    "scripts": []
+    "memory": 2,
+    "os": "windows"
   },
   "attacker": {
     "image": "kalilinux/rolling",
