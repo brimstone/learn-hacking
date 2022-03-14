@@ -13,6 +13,7 @@
   "_default": {
     "description": "Lab system from learn-hacking",
     "dns": "192.168.56.2",
+    "files": [],
     "folders": [],
     "gateway": "192.168.56.2",
     "headless": true,
@@ -28,11 +29,15 @@
     "os": "linux"
   },
   "station1": {
+    "folders": [
+      {
+        "guest": "/host",
+        "host": "/tmp/"
+      }
+    ],
     "ip": "192.168.56.11",
     "scripts": [
-      "domainjoin.ps1",
-      "general.ps1",
-      "autologin-tony.ps1"
+      "general.ps1"
     ]
   },
   "station2": {
